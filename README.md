@@ -1,2 +1,4 @@
 # galeria
-Gallery i created using GSAP
+Gallery created using GSAP!
+
+Galeria criada usando GSAP!

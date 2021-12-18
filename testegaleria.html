@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1 {font-size: 5em; color: whitesmoke; margin-left: 2em;}
+        .img {
+            box-shadow: 4px 1px 15px rgb(100, 100, 100, 0.3);
+            width: 18rem;
+            height: 18rem;
+            position: absolute;
+            top: 35%;
+            transform: perspective(1000px) rotateY(-25deg);
+        }
+        #img1 {background-color: blue; left: 20%; z-index: 5} 
+        #img2 {background-color: aquamarine; left: 30%; z-index: 4}
+        #img3 {background-color: pink; left: 40%; z-index: 3}
+        #img4 {background-color: palevioletred; left: 50%; z-index: 2}
+        #img5 {background-color: tomato; left: 60%; z-index: 1}
+        /* #img6 {background-color: red; left: 0;}
+        #img7 {background-color: orange; left: 0;}
+        #img8 {background-color: yellow; left: 0;}
+        #img9 {background-color: greenyellow; left: 0; opacity: 0}
+        #img10 {background-color: olivedrab; left: 0; opacity: 0} */
+    </style>
+</head>
+
+<body>
+<!-- <div id="img10" class="img"><h1>10</h1></div>
+<div id="img9" class="img"><h1>9</h1></div>
+<div id="img8" class="img"><h1>8</h1></div>
+<div id="img7" class="img"><h1>7</h1></div>
+<div id="img6" class="img"><h1>6</h1></div> -->
+<div id="img5" class="img"><h1>5</h1></div>
+<div id="img4" class="img"><h1>4</h1></div>
+<div id="img3" class="img"><h1>3</h1></div>
+<div id="img2" class="img"><h1>2</h1></div>
+<div id="img1" class="img"><h1>1</h1></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/EasePack.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+let images = gsap.utils.toArray(".img");
+gsap.set(images, {perspective: 1000, rotationY: -25});
+
+
+images.forEach((image, i) => {
+  let siblingsLeft = images.slice(i+1),
+      siblingsRight = images.slice(0, i);
+  
+  image.addEventListener("mouseenter", () => {
+
+    gsap.to(image, {rotationY: 0, scale: 1.15, x: 0, duration: 0.3, overwrite: true});
+
+    if (siblingsLeft.length) {
+      gsap.to(siblingsLeft, {x: -140, rotationY: -25, duration: 0.3, scale: 1, overwrite: true});
+    }
+  
+    if (siblingsRight.length) {
+      gsap.to(siblingsRight, {x: 50, rotationY: -25, duration: 0.3, scale: 1, overwrite: true});
+    }
+  });
+
+  image.addEventListener("mouseleave", () => {
+    gsap.to(images, {rotationY: -25, scale: 1, duration: 0.3, x: 0, overwrite: true});
+  })
+});
+
+</script>
+</body>
+</html>
